@@ -1,9 +1,5 @@
-import {Container, Row} from 'react-bootstrap';
-import Header from '../UI/organisms/Header.js';
-import Footer from '../UI/organisms/Footer.js';
-import ListNewsDetails from '../UI/organisms/ListNewsDetails.js';
 import BlogPageLayout from '../templates/BlogPageLayout.js';
-const NewsAndEvents = (props) => {
+const NewsAndEvents = () => {
 	const listOfNews = [
 		{	
 			"date" : "9.8.21",

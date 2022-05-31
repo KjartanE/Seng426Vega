@@ -3,7 +3,7 @@ import {fetchuser, enableAccount, changeAccountRole} from  '../../service/AdminP
 import {UserContext} from '../../auth/UserProvider.js';
 import {useState, useContext, useEffect} from 'react';
 
-import {Form, Button, Row, Col, Table} from 'react-bootstrap';
+import {Form, Table} from 'react-bootstrap';
 
 const AdminPanel = (props) => {
 	const {user} = useContext(UserContext);
@@ -37,7 +37,7 @@ const AdminPanel = (props) => {
 	const listOfUsersHTML = () => {
 		if(listOfUsers.length){
 			return listOfUsers.map((user) => <tr><td>{user.firstName}</td><td>{user.lastName}</td><td>{user.username}</td><td onClick={() => enableUser(user.username)}>
-				<a href="#">Enable User</a></td>
+				<a href="ref">Enable User</a></td>
 				<td>
 					<Form.Select aria-label="Floating label select example" onChange={(evt) => changeRole(evt, user.username)}>
 					    <option>Open this select menu</option>

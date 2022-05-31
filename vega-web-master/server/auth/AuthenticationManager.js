@@ -3,7 +3,7 @@ import express from 'express';
 import {login} from '../services/LoginRequestAPI.js';
 
 function authModule(req, res) {
-	if (req.method == 'POST') {
+	if (req.method === 'POST') {
     	const userInfo = req.body;
     	console.log(userInfo);
     	login("http://localhost:8080/venus/authenticate", userInfo)

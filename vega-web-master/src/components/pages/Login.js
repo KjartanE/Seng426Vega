@@ -8,8 +8,7 @@ import  { Redirect } from 'react-router-dom'
 
 const Login = (props) => {
 	
-	const { context } = props; 
-	const {user, setUserInfo,logout} = useContext(UserContext);
+	const {user, setUserInfo} = useContext(UserContext);
 	const [auth, setAuth] = useState(false);
 	console.log("Userinfo", user);
 	function onSubmit(userInfo){

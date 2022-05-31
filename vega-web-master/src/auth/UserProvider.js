@@ -39,6 +39,8 @@ const UserProvider = ({children}) => {
     const getUserInfo = () => {
       return window.localStorage.getItem("jwt");
     }
+    
+    console.log(getUserInfo());
 
   	// Logout updates the user data to default
   	const logout = () => {

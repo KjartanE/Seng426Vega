@@ -13,6 +13,8 @@ const Resources = (props) => {
 	const [dataLoaded, setDataLoaded] = useState(false);
 	const [content, setContent] = useState('');
 	var uploadHTML;
+
+	// eslint-disable-next-line
 	useEffect(() => {
 		console.log("JWT is",user.jwt, dataLoaded)
 			console.log("Inside useEffect")
@@ -21,12 +23,13 @@ const Resources = (props) => {
 					setDataLoaded(true);
 					setFiles(resp)});
 		
-
+	// eslint-disable-next-line
 	}, [user])
 
 	const changeHandler = (event) => {
 		setSelectedFile(event.target.files[0]);
 		setIsFilePicked(true);
+		console.log("Is file picked?", isFilePicked);
 	};
 
 	const handleSubmission = () => {
@@ -49,12 +52,12 @@ const Resources = (props) => {
 
 	const listOfFilesHTML = () => {
 		if(listOfFiles.length){
-			return listOfFiles.map((file) => <li onClick={() => fetchFileData(file)} style={{"cursor":"pointer"}}><a href="#">{file}</a></li>)
+			return listOfFiles.map((file) => <li onClick={() => fetchFileData(file)} style={{"cursor":"pointer"}}><a href="ref">{file}</a></li>)
 		}
 
 	}
 
-	if (user.role == "ROLE_ADMIN"){
+	if (user.role === "ROLE_ADMIN"){
 		uploadHTML = (<Row>
 				<Col className="mx-auto" xs={6}>
 					<Form.Group controlId="formFile" className="mb-3">
