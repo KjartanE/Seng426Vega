@@ -13,7 +13,7 @@ variables:
   dockerRegistryServiceConnection: 'a9f37937-6f95-4080-933f-aceb11963f7a'
   imageRepository: 'vegaweb'
   containerRegistry: 'vegacontainerregistry.azurecr.io'
-  dockerfilePath: '$(Build.SourcesDirectory)/vega-web-master/Dockerfile'
+  dockerfilePath: '$(Build.SourcesDirectory)/vega-web-master/Dockerfile.prod'
   tag: '$(Build.BuildId)'
 
   # Agent VM image name
