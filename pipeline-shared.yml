@@ -2,8 +2,6 @@
 # Build and push an image to Azure Container Registry
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
-trigger:
-- azure-pipeline
 
 resources:
 - repo: self
@@ -13,9 +11,11 @@ variables:
   dockerRegistryServiceConnection: 'a9f37937-6f95-4080-933f-aceb11963f7a'
   imageRepositorySpring: 'vegaspring'
   imageRepositoryWeb: 'vegaweb'
+  imageRepositoryWebServer: 'vegawebserver'
   containerRegistry: 'vegacontainerregistry.azurecr.io'
-  dockerfilePathSpring: '$(Build.SourcesDirectory)/vega-spring-master/Dockerfile.prod'
-  dockerfilePathWeb: '$(Build.SourcesDirectory)/vega-web-master/Dockerfile.prod'
+  dockerfilePathSpring: '$(Build.SourcesDirectory)/vega-spring-master/Dockerfile'
+  dockerfilePathWeb: '$(Build.SourcesDirectory)/vega-web-master/Dockerfile'
+  dockerfilePathWebServer: '$(Build.SourcesDirectory)/vega-web-master/server/Dockerfile'
   tag: '$(Build.BuildId)'
 
   # Agent VM image name
@@ -45,6 +45,15 @@ stages:
         command: buildAndPush
         repository: $(imageRepositoryWeb)
         dockerfile: $(dockerfilePathWeb)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+    - task: Docker@2
+      displayName: Build and push the web server image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepositoryWebServer)
+        dockerfile: $(dockerfilePathWebServer)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
