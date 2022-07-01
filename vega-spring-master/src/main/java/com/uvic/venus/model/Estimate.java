@@ -12,11 +12,11 @@ public class Estimate {
     private String packageType;
     private String companySize;
     private String email;
-    private Bool alwaysSupport
-    private Bool dataBackup;
-    private Bool dataEncryption;
+    private Boolean alwaysSupport;
+    private Boolean dataBackup;
+    private Boolean dataEncryption;
 
-    public Estimate(String packageType, String companySize, String email, Bool alwaysSupport, Bool dataBackup, Bool dataEncryption) {
+    public Estimate(String packageType, String companySize, String email, Boolean alwaysSupport, Boolean dataBackup, Boolean dataEncryption) {
         this.packageType = packageType;
         this.companySize = companySize;
         this.email = email;
@@ -48,27 +48,27 @@ public class Estimate {
 
     public void setEmail(String email) { this.email = email;  }
 
-    public Bool getAlwaysSupport() {
+    public Boolean getAlwaysSupport() {
         return alwaysSupport;
     }
 
-    public void setAlwaysSupport(Bool alwaysSupport) {
+    public void setAlwaysSupport(Boolean alwaysSupport) {
         this.alwaysSupport = alwaysSupport;
     }
 
-    public Bool getDataBackup() {
+    public Boolean getDataBackup() {
         return dataBackup;
     }
 
-    public void setDataBackup(Bool dataBackup) {
+    public void setDataBackup(Boolean dataBackup) {
         this.dataBackup = dataBackup;
     }
 
-    public Bool getDataEncryption() {
+    public Boolean getDataEncryption() {
         return dataEncryption;
     }
 
-    public void setDataEncryption(Bool dataEncryption) {
+    public void setDataEncryption(Boolean dataEncryption) {
         this.dataEncryption = dataEncryption;
     }
 
