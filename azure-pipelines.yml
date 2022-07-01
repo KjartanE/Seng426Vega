@@ -1,0 +1,59 @@
+# Docker
+# Build and push an image to Azure Container Registry
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+
+resources:
+- repo: self
+
+variables:
+  # Container registry service connection established during pipeline creation
+  dockerRegistryServiceConnection: 'a9f37937-6f95-4080-933f-aceb11963f7a'
+  imageRepositorySpring: 'vegaspring'
+  imageRepositoryWeb: 'vegaweb'
+  imageRepositoryWebServer: 'vegawebserver'
+  containerRegistry: 'vegacontainerregistry.azurecr.io'
+  dockerfilePathSpring: '$(Build.SourcesDirectory)/vega-spring-master/Dockerfile'
+  dockerfilePathWeb: '$(Build.SourcesDirectory)/vega-web-master/Dockerfile'
+  dockerfilePathWebServer: '$(Build.SourcesDirectory)/vega-web-master/server/Dockerfile'
+  tag: '$(Build.BuildId)'
+
+  # Agent VM image name
+  vmImageName: 'ubuntu-latest'
+
+stages:
+- stage: Build
+  displayName: Build and push stage
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: Docker@2
+      displayName: Build and push the spring image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepositorySpring)
+        dockerfile: $(dockerfilePathSpring)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+    - task: Docker@2
+      displayName: Build and push the web image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepositoryWeb)
+        dockerfile: $(dockerfilePathWeb)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+    - task: Docker@2
+      displayName: Build and push the web server image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepositoryWebServer)
+        dockerfile: $(dockerfilePathWebServer)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
