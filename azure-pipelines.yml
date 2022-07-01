@@ -8,6 +8,7 @@ resources:
 
 trigger:
 - main
+- azure-pipelines
 
 variables:
   # Container registry service connection established during pipeline creation
@@ -42,6 +43,11 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
+      env:
+        API_URL: "https://seng-vega-web-server.azurewebsites.net"
+        DB_URL: "https://seng-vega-spring.azurewebsites.net"
+        APP_URL: "https://seng-vega-web.azurewebsites.net"
+        
     - task: Docker@2
       displayName: Build and push the web image to container registry
       inputs:
@@ -51,6 +57,10 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
+      env:
+        API_URL: "https://seng-vega-web-server.azurewebsites.net"
+        DB_URL: "https://seng-vega-spring.azurewebsites.net"
+        APP_URL: "https://seng-vega-web.azurewebsites.net"
     - task: Docker@2
       displayName: Build and push the web server image to container registry
       inputs:
@@ -60,3 +70,7 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
+      env:
+        API_URL: "https://seng-vega-web-server.azurewebsites.net"
+        DB_URL: "https://seng-vega-spring.azurewebsites.net"
+        APP_URL: "https://seng-vega-web.azurewebsites.net"
