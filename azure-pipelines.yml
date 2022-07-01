@@ -21,6 +21,9 @@ variables:
   dockerfilePathWeb: '$(Build.SourcesDirectory)/vega-web-master/Dockerfile'
   dockerfilePathWebServer: '$(Build.SourcesDirectory)/vega-web-master/server/Dockerfile'
   tag: '$(Build.BuildId)'
+  API_URL: "https://seng-vega-web-server.azurewebsites.net"
+  DB_URL: "https://seng-vega-spring.azurewebsites.net"
+  APP_URL: "https://seng-vega-web.azurewebsites.net"
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
@@ -44,9 +47,9 @@ stages:
         tags: |
           $(tag)
       env:
-        API_URL: "https://seng-vega-web-server.azurewebsites.net"
-        DB_URL: "https://seng-vega-spring.azurewebsites.net"
-        APP_URL: "https://seng-vega-web.azurewebsites.net"
+        API_URL: ${API_URL}
+        DB_URL: ${DB_URL}
+        APP_URL: ${APP_URL}
         
     - task: Docker@2
       displayName: Build and push the web image to container registry
@@ -58,9 +61,9 @@ stages:
         tags: |
           $(tag)
       env:
-        API_URL: "https://seng-vega-web-server.azurewebsites.net"
-        DB_URL: "https://seng-vega-spring.azurewebsites.net"
-        APP_URL: "https://seng-vega-web.azurewebsites.net"
+        API_URL: ${API_URL}
+        DB_URL: ${DB_URL}
+        APP_URL: ${APP_URL}
     - task: Docker@2
       displayName: Build and push the web server image to container registry
       inputs:
@@ -71,6 +74,6 @@ stages:
         tags: |
           $(tag)
       env:
-        API_URL: "https://seng-vega-web-server.azurewebsites.net"
-        DB_URL: "https://seng-vega-spring.azurewebsites.net"
-        APP_URL: "https://seng-vega-web.azurewebsites.net"
+        API_URL: ${API_URL}
+        DB_URL: ${DB_URL}
+        APP_URL: ${APP_URL}
