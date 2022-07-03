@@ -24,6 +24,7 @@ variables:
   API_URL: "https://seng-vega-web-server.azurewebsites.net"
   DB_URL: "https://seng-vega-spring.azurewebsites.net"
   APP_URL: "https://seng-vega-web.azurewebsites.net"
+  NODE_ENV: "main"
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
@@ -50,6 +51,7 @@ stages:
         API_URL: ${API_URL}
         DB_URL: ${DB_URL}
         APP_URL: ${APP_URL}
+        NODE_ENV: ${NODE_ENV}
         
     - task: Docker@2
       displayName: Build and push the web image to container registry
@@ -64,6 +66,8 @@ stages:
         API_URL: ${API_URL}
         DB_URL: ${DB_URL}
         APP_URL: ${APP_URL}
+        NODE_ENV: ${NODE_ENV}
+
     - task: Docker@2
       displayName: Build and push the web server image to container registry
       inputs:
@@ -77,3 +81,4 @@ stages:
         API_URL: ${API_URL}
         DB_URL: ${DB_URL}
         APP_URL: ${APP_URL}
+        NODE_ENV: ${NODE_ENV}

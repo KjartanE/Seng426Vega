@@ -32,7 +32,6 @@ app.use("/api/venus", fileUploader)
 app.use("/api/venus/admin", adminPanel)
 
 app.listen(port, () => {
-  console.log('HELP ME I am sacared');
   console.log('process.env', process.env);
 
   console.log(process.env.API_URL);

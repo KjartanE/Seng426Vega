@@ -20,6 +20,7 @@ import UserAccount from './components/pages/UserAccount.js';
 
 function App() {
   
+  console.log('process.env', process.env);
 
   const {user, setUserInfo, logout} = useContext(UserContext);
 
