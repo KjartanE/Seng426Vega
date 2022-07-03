@@ -6,6 +6,9 @@ import reportWebVitals from './reportWebVitals';
 
 import { BrowserRouter } from 'react-router-dom';
 
+console.log('Mom pick me up');
+console.log('process.env', process.env);
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
