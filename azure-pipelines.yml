@@ -36,11 +36,11 @@ stages:
     - task: Npm@1
       inputs:
         command: 'install'
-        workingDir: '$(Build.SourcesDirectory)'
+        workingDir: '$(Build.SourcesDirectory)/vega-web-master/'
     - task: Npm@1
       inputs:
         command: 'custom'
-        workingDir: '$(Build.SourcesDirectory)'
+        workingDir: '$(Build.SourcesDirectory)/vega-web-master/'
         customCommand: 'test'
 
 - stage: Build
