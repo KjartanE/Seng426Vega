@@ -1,7 +1,7 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import HomePageLayout from './components/templates/HomePageLayout.js';
-import { Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Platform from './components/pages/Platform.js';
 import Login from './components/pages/Login.js';
 import NewsAndEvents from './components/pages/NewsAndEvents.js';
@@ -17,6 +17,7 @@ function App() {
 
   return (
    <UserProvider> 
+      <BrowserRouter>
         <Switch>
         	<Route path="/" component={HomePageLayout} exact />
         	<Route path="/contactus" component={UserRegistration} exact />
@@ -28,6 +29,7 @@ function App() {
           <Route path="/resources" component={Resources} />
           <Route path="/adminpanel" component={AdminPanel} />
         </Switch>
+      </BrowserRouter>
     </UserProvider>
   );
 }

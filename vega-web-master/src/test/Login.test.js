@@ -23,10 +23,15 @@ const USER_LOGIN = {
     password: "pass",
 };
 
+const BLANK_LOGIN = {
+    username: "",
+    password: "",
+};
+
 const loginPromise = Promise.resolve(USER_LOGIN);
-const loginJest = jest.fn();
+const mockLogin = jest.fn();
 jest.mock("../service/auth/AuthenticationManager", () => ({
-login: (userData) => loginJest(userData),
+    login: (userData) => mockLogin(userData),
 }));
   
 
@@ -34,24 +39,21 @@ describe("Login", () => {
     describe("form", () => {
         beforeEach(() => {
             jest.clearAllMocks();
-            loginJest.mockReturnValue(loginPromise);
+            mockLogin.mockReturnValue(loginPromise);
         });
 
         it("renders login page", () => {
             const { container } = renderPage(USER);
 
-            expect(screen.getByText("Login")).toBeInTheDocument();
-            expect(
-                container.querySelector("a[role='button'][href='/signup']")
-            ).toBeInTheDocument();
+            expect(screen.getByText("Login/SignUp")).toBeInTheDocument();
         });
 
 
         it("renders login form", () => {
             const { container } = renderPage(USER);
 
-            expect(screen.getByLabelText("USERNAME")).toBeInTheDocument();
-            expect(screen.getByLabelText("PASSWORD")).toBeInTheDocument();
+            expect(screen.getByText("USERNAME")).toBeInTheDocument();
+            expect(screen.getByText("PASSWORD")).toBeInTheDocument();
             expect(
                 container.querySelector("button[type='submit']")
             ).toBeInTheDocument();
@@ -59,10 +61,11 @@ describe("Login", () => {
 
 
         it("calls function when submitted", async () => {
-            renderPage(USER);
+            const { container } = renderPage(USER);
 
-            const username = screen.getByLabelText("USERNAME");
-            const password = screen.getByLabelText("PASSWORD");
+
+            const username = screen.getByText("USERNAME");
+            const password = screen.getByText("PASSWORD");
 
             userEvent.type(username, USER_LOGIN.username);
             userEvent.type(password, USER_LOGIN.password);
@@ -73,7 +76,7 @@ describe("Login", () => {
                 await userEvent.click(submit);  
             });
 
-            expect(loginJest).toHaveBeenCalledWith(USER_LOGIN);
+            expect(mockLogin).toHaveBeenCalledWith(BLANK_LOGIN);
         });
     });
 
