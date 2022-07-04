@@ -25,6 +25,23 @@ variables:
   vmImageName: 'ubuntu-latest'
 
 stages:
+
+- stage: Test
+  displayName: Run Unit Tests
+  jobs:
+  - job: Test
+    displayName: Run Tests
+    steps:
+    - task: Npm@1
+      inputs:
+        command: 'install'
+        workingDir: '$(Build.SourcesDirectory)'
+    - task: Npm@1
+      inputs:
+        command: 'custom'
+        workingDir: '$(Build.SourcesDirectory)'
+        customCommand: 'test'
+
 - stage: Build
   displayName: Build and push stage
   jobs:
