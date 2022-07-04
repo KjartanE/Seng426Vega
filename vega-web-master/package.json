@@ -1,0 +1,12 @@
+{
+  "name": "vega-web-master",
+  "version": "1.0.0",
+  "description": "Frontend is written using React framework. To start the application use below command.",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
