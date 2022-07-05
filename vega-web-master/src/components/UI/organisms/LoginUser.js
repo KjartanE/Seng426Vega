@@ -6,7 +6,7 @@ const LoginUser = ({onSubmit}) => {
 	const [username, setUsername]  = useState('');
 	const [password, setPassword] = useState('');
 
-	const submitForm:function = (evt) => {
+	const submitForm = (evt) => {
 		evt.preventDefault();
 		onSubmit({
 			'username' : username,
