@@ -37,23 +37,21 @@ public class EstimateController {
   @Autowired
   DataSource dataSource;
 
-  @Autowired
-  StorageService storageService;
-
   @RequestMapping(value = "/fetchestimates", method = RequestMethod.GET)
   public ResponseEntity<?> fetchAllEstimates() {
     List<Estimate> estimateList = estimateDAO.findAll();
     return ResponseEntity.ok(estimateList);
   }
 
-  @RequestMapping(value = "/submitestimate", method = RequestMethod.POST)
+  // Endpoint /submitestimate for POST request, to submit an estimate to the database.
+  @RequestMapping(value = "/submitestimate", method = RequestMethod.GET)
   public ResponseEntity<?> submitEstimate(
     @RequestParam("packageType") String packageType,
     @RequestParam("companySize") String companySize,
     @RequestParam("email") String email,
-    @RequestParam("alwaysSupport") boolean alwaysSupport,
-    @RequestParam("dataBackup") boolean dataBackup,
-    @RequestParam("dataEncryption") boolean dataEncryption
+    @RequestParam("alwaysSupport") Boolean alwaysSupport,
+    @RequestParam("dataBackup") Boolean dataBackup,
+    @RequestParam("dataEncryption") Boolean dataEncryption
   ) {
     Estimate estimate = new Estimate(
       packageType,
@@ -64,6 +62,6 @@ public class EstimateController {
       dataEncryption
     );
     estimateDAO.save(estimate);
-    return ResponseEntity.ok(estimate);
+    return ResponseEntity.ok("SUCCESS");
   }
 }

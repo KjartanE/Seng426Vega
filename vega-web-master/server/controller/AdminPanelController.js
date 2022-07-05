@@ -1,4 +1,3 @@
-import bodyParser from 'body-parser';
 import express from 'express';
 import {fetchusers, enableAccount, changeRole} from '../services/AdminPanelAPI.js';
 import fileUpload from 'express-fileupload';

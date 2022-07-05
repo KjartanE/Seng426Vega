@@ -33,12 +33,12 @@ const EstimationForm = ({ onSubmit }) => {
       price,
     });
     onSubmit({
-      packageType: packageType,
-      email: email,
-      companySize: companySize,
-      alwaysSupport: alwaysSupport,
-      dataBakcup: dataBackup,
-      dataEncryption: dataEncryption,
+      packageType: packageType ? packageType : "N/A",
+      email: email ? email : "N/A",
+      companySize: companySize ? companySize : "N/A",
+      alwaysSupport: alwaysSupport ? alwaysSupport : false,
+      dataBackup: dataBackup ? dataBackup : false,
+      dataEncryption: dataEncryption ? dataEncryption : false,
     });
   };
 

@@ -1,9 +1,14 @@
-import { doGet, doPost } from "../BaseAPI.js";
+import { doGet, doSubmitEstimation } from "../BaseAPI.js";
 
-export function submitEstimation(estimation) {
-  return doPost("http://localhost:8000/api/submitestimate/", estimation);
+export function submitEstimation(estimate, token) {
+  console.log("SUBMITTING ESTIMATION", estimate);
+  return doSubmitEstimation(
+    `http://localhost:8000/api/estimate/submitestimate?packageType=${estimate.packageType}&companySize=${estimate.companySize}&email=${estimate.email}&alwaysSupport=${estimate.alwaysSupport}&dataBackup=${estimate.dataBackup}&dataEncryption=${estimate.dataEncryption}`,
+    token
+  );
 }
 
-export function getEstimations() {
-  return doGet("http://localhost:8000/api/fetchestimates");
+export function getEstimates(token) {
+  console.log("GOT A TOKEN HERE: ", token);
+  return doGet("http://localhost:8000/api/estimate/fetchestimates", token);
 }
