@@ -21,4 +21,14 @@ CREATE TABLE IF NOT EXISTS userinfo (
     lastname VARCHAR(50) NOT NULL,
     FOREIGN KEY (username) REFERENCES users(username)
 );
+
+CREATE TABLE IF NOT EXISTS estimation (
+    email VARCHAR(50) NOT NULL,
+    packagetype VARCHAR(50) NOT NULL,
+    companysize INTEGER NOT NULL,
+    alwayssupport BOOLEAN NOT NULL,
+    dataencryption BOOLEAN NOT NULL,
+    databackup BOOLEAN NOT NULL,
+    quotedprice INTEGER NOT NULL
+);
 -- CREATE UNIQUE  INDEX ix_auth_username on authorities (username,authority);
