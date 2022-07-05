@@ -3,35 +3,40 @@ import {fetchuser, enableAccount, changeAccountRole} from  '../../service/AdminP
 import {UserContext} from '../../auth/UserProvider.js';
 import {useState, useContext, useEffect} from 'react';
 
-import {Form, Button, Row, Col, Table} from 'react-bootstrap';
+import {Form, Table} from 'react-bootstrap';
 
 const AdminPanel = (props) => {
 	const {user} = useContext(UserContext);
 	const [listOfUsers, setUsers] = useState([]);
-	useEffect(() => {
-			console.log("Inside useEffect")
-			fetchuser(user.jwt)
-				.then(resp => {
-					setUsers(resp)
-					});
-		
+	const updateUsers = () => {
+	    console.log("Updating Users")
+	    fetchuser(user.jwt)
+		.then(resp => {
+		    setUsers(resp)
+		})
+	}
 
+	useEffect(() => {
+		updateUsers()
 	}, [user]);
 
 	const enableUser = (username) => {
-		console.log("Enable User called with",username)
+		console.log("Enable User called with", username)
 		enableAccount(username, user.jwt)
-		.then(resp => 
-			console.log("User enabled"))
+			.then(_resp => {
+				console.log("User enabled")
+				updateUsers()
+			})
 	}
-
 
 	const changeRole = (evt, username) => {
 		console.log(evt.target.value, username)
-		var role = evt.target.value
+		const role = evt.target.value
 		changeAccountRole(username, role, user.jwt)
-		.then(resp => 
-			console.log("Changed Roles"))
+			.then(_resp => {
+				console.log("Changed Roles")
+				updateUsers()
+			})
 	}
 
 	const listOfUsersHTML = () => {

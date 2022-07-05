@@ -15,11 +15,11 @@ const Login = (props) => {
 	function onSubmit(userInfo){
 		login(userInfo)
 			.then(res => {
-				console.log("Response", res);
-				console.log(res.jwt);
-				var role = res.authorities[0].authority;
-				setUserInfo(userInfo.username, res.jwt, role)
-				setAuth(true);
+				if (typeof res.authorities == "object") {
+					const role = res.authorities[0].authority;
+					setUserInfo(userInfo.username, res.jwt, role);
+					return setAuth(true);
+				  } 
 			})
 	}
 

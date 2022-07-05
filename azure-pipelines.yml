@@ -8,6 +8,7 @@ resources:
 
 trigger:
 - main
+- develop
 
 variables:
   # Container registry service connection established during pipeline creation
@@ -25,6 +26,23 @@ variables:
   vmImageName: 'ubuntu-latest'
 
 stages:
+
+- stage: Test
+  displayName: Run Unit Tests
+  jobs:
+  - job: Test
+    displayName: Run Tests
+    steps:
+    - task: Npm@1
+      inputs:
+        command: 'install'
+        workingDir: '$(Build.SourcesDirectory)/vega-web-master/'
+    - task: Npm@1
+      inputs:
+        command: 'custom'
+        workingDir: '$(Build.SourcesDirectory)/vega-web-master/'
+        customCommand: 'test'
+
 - stage: Build
   displayName: Build and push stage
   jobs:
